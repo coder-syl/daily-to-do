@@ -1,17 +1,19 @@
-# demo
+# 每日清单
 
-> An electron-vue project
-
+> 一个基于Electron-Vue
 #### Build Setup
 
 ``` bash
-# install dependencies
+# 安装依赖
 npm install
+或 cnpm install（推荐）
+
 
 # serve with hot reload at localhost:9080
 npm run dev
+或者 yarn dev（本地有的话）
 
-# build electron application for production
+# 打包成可执行程序
 npm run build
 
 # run unit & end-to-end tests
@@ -22,6 +24,4 @@ npm test
 
 ---
 
-This project was generated with [electron-vue](https://github.com/SimulatedGREG/electron-vue) using [vue-cli](https://github.com/vuejs/vue-cli). Documentation about the original structure can be found [here](https://simulatedgreg.gitbooks.io/electron-vue/content/index.html).
-
-![](index.png)
+![](./index.png)
