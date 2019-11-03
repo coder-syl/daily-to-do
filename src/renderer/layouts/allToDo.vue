@@ -3,7 +3,7 @@
     :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
     style="width: 100%"
   >
-    <el-table-column label="add-date" prop="date"></el-table-column>
+    <el-table-column label="end-date" prop="endDate"></el-table-column>
     <el-table-column label="to-do-list" prop="name"></el-table-column>
     <el-table-column align="right">
       <template slot="header" slot-scope="scope">
@@ -22,31 +22,12 @@
 export default {
   data() {
     return {
-      tableData: [
-        {
-          date: "2016-05-02",
-          name:
-            "我能用滴答清单做什么？ 我能用滴答清单做什么我能用滴答清单做什么我能用滴答清单做什么我能用滴答清单做什么",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-04",
-          name: "我能用滴答清单做什么？ ",
-          address: "上海市普陀区金沙江路 1517 弄"
-        },
-        {
-          date: "2016-05-01",
-          name: "我能用滴答清单做什么？ ",
-          address: "上海市普陀区金沙江路 1519 弄"
-        },
-        {
-          date: "2016-05-03",
-          name: "我能用滴答清单做什么？ ",
-          address: "上海市普陀区金沙江路 1516 弄"
-        }
-      ],
+      tableData: [],
       search: ""
     };
+  },
+  mounted() {
+    this.tableData = this.$db.get("toDo").value();
   },
   methods: {
     handleEdit(index, row) {
@@ -54,6 +35,21 @@ export default {
     },
     handleDelete(index, row) {
       console.log(index, row);
+      let result = this.$db
+        .get("toDo")
+        .removeById(row.id)
+        .write();
+      if (result) {
+        this.$message({
+          message: "删除成功",
+          type: "success"
+        });
+      } else {
+        this.$message({
+          message: "删除失败",
+          type: "warning"
+        });
+      }
     }
   }
 };

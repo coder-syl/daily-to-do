@@ -5,6 +5,10 @@ import 'element-ui/lib/theme-chalk/index.css';
 import App from './App'
 import router from './router'
 import store from './store'
+import db from '../datastore/index'
+// 将db直接挂在在vue的原型链上，使用this.$db的方法来使用lowdb
+Vue.prototype.$db = db
+
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 Vue.http = Vue.prototype.$http = axios

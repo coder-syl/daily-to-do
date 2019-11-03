@@ -21,6 +21,11 @@ export default new Router({
       component: require('../layouts/allTodo').default
     },
     {
+      path: '/addToDo',
+      name: 'add-to-do',
+      component: require('../layouts/addToDo').default
+    },
+    {
       path: '*',
       redirect: '/'
     }

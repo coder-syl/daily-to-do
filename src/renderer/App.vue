@@ -48,7 +48,7 @@
                   <span slot="title">垃圾桶</span>
                 </el-menu-item>
               </router-link>
-              <router-link to="/foo">
+              <router-link to="/addToDo">
                 <el-menu-item index="8">
                   <i class="el-icon-circle-plus-outline"></i>
                   <span slot="title">添加清单</span>
@@ -79,13 +79,14 @@ export default {
 
 <style scope>
 * {
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   margin: 0;
   padding: 0;
 }
 
 body {
   font-family: "Source Sans Pro", sans-serif;
+  border-top: 1px solid rgb(248, 246, 246);
 }
 a {
   text-decoration: none;
