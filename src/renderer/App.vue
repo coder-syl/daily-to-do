@@ -36,13 +36,13 @@
                   </router-link>
                 </el-menu-item-group>
               </el-submenu>
-              <router-link to="/foo">
+              <router-link to="/allDone">
                 <el-menu-item index="6">
                   <i class="el-icon-check"></i>
                   <span slot="title">已完成</span>
                 </el-menu-item>
               </router-link>
-              <router-link to="/foo">
+              <router-link to="/allDelete">
                 <el-menu-item index="7">
                   <i class="el-icon-delete"></i>
                   <span slot="title">垃圾桶</span>

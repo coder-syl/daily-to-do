@@ -26,6 +26,16 @@ export default new Router({
       component: require('../layouts/addToDo').default
     },
     {
+      path: '/allDone',
+      name: 'all-done',
+      component: require('../layouts/allDone').default
+    },
+    {
+      path: '/allDelete',
+      name: 'all-delete',
+      component: require('../layouts/allDelete').default
+    },
+    {
       path: '*',
       redirect: '/'
     }

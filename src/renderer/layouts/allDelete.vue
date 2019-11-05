@@ -1,32 +1,22 @@
 <template>
   <el-table
     :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+    style="width: 100%"
   >
     <el-table-column label="end-date" prop="endDate" width="160"></el-table-column>
     <el-table-column label="to-do-list" prop="name"></el-table-column>
-    <el-table-column
-      prop="importance"
-      label="重要度"
-      width="150"
-      :filters="[{ text: '重要且紧急', value: '重要且紧急' }, { text: '重要不紧急', value: '重要不紧急' },{text: '紧急且重要', value: '紧急且重要'},{ text: '紧急不重要', value: '紧急不重要'}]"
-      :filter-method="filterTag"
-      filter-placement="bottom-end"
-    >
-      <template slot-scope="scope">
-        <el-tag
-          :type="scope.row.tag === '重要且紧急' ? 'primary' : 'success'"
-          disable-transitions
-        >{{scope.row.importance}}</el-tag>
-      </template>
-    </el-table-column>
     <el-table-column align="right">
       <template slot="header" slot-scope="scope">
         <el-input v-model="search" size="mini" placeholder="输入关键字搜索" />
       </template>
       <template slot-scope="scope">
         <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
-        <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row,2)">Delete</el-button>
-        <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row,1)">加入完成</el-button>
+        <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row,0)">设为待作</el-button>
+        <el-button
+          size="mini"
+          type="danger"
+          @click="handleDeleteFromDisk(scope.$index, scope.row)"
+        >彻底删除</el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -44,15 +34,11 @@ export default {
     this.iniData();
   },
   methods: {
-    filterTag(value, row) {
-      return row.importance === value;
-    },
     /** 初始化数据，读取json赋值给tableData */
     iniData() {
       this.tableData = this.$db
         .get("toDo")
-        .filter({ flag: 0 })
-        .sortBy("endDate")
+        .filter({ flag: 2 })
         .value();
       console.log(this.tableData);
     },
@@ -65,6 +51,26 @@ export default {
         .get("toDo")
         .find({ id: row.id })
         .assign({ flag: flag })
+        .write();
+      if (result) {
+        this.$message({
+          message: "操作成功",
+          type: "success"
+        });
+        this.iniData();
+      } else {
+        this.$message({
+          message: "操作失败",
+          type: "warning"
+        });
+        this.iniData();
+      }
+    },
+    handleDeleteFromDisk(index, row, flag) {
+      console.log(index, row);
+      let result = this.$db
+        .get("toDo")
+        .remove({ id: row.id })
         .write();
       if (result) {
         this.$message({

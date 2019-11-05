@@ -19,12 +19,12 @@ function createWindow() {
    */
   createMenu();
   mainWindow = new BrowserWindow({
-    height: 563,
+    height: 565,
     useContentSize: true,
-    width: 1000,
+    width: 1050,
     autoHideMenuBar: true,
     darkTheme: true,
-    resizable: false,
+    // resizable: false,
   })
 
   mainWindow.loadURL(winURL)

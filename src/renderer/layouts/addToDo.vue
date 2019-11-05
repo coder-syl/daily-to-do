@@ -64,7 +64,8 @@ export default {
         endTime: "",
         notice: false,
         importance: "",
-        detail: ""
+        detail: "",
+        flag: 1
       },
       rules: {
         name: [
@@ -113,7 +114,8 @@ export default {
               endTime: this.toDoform.endTime,
               notice: this.toDoform.notice,
               importance: this.toDoform.importance,
-              detail: this.toDoform.detail
+              detail: this.toDoform.detail,
+              flag: 0
             })
             .write();
           if (result) {
