@@ -1,6 +1,6 @@
 # 每日清单
 
-> 一个基于Electron-Vue
+> 一个基于Electron-Vue的to-do-list
 #### Build Setup
 
 ``` bash
@@ -24,3 +24,9 @@ npm test
 
 ---
 
+![](./index.png)
+
+
+已完成功能：
+1. 登录
+2. 增删改查

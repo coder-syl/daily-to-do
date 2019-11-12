@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <el-container>
-      <el-aside width="170px">
+    <!-- <el-container>
+      <el-aside width="170px" v-if="show">
         <el-row class="tac">
           <el-col>
             <el-menu
@@ -22,13 +22,13 @@
                       所有
                     </el-menu-item>
                   </router-link>
-                  <router-link to="/foo">
+                  <router-link to="/todayToDo">
                     <el-menu-item index="1-2">
                       <i class="el-icon-document"></i>
                       今天
                     </el-menu-item>
                   </router-link>
-                  <router-link to="/foo">
+                  <router-link to="/seventDayToDo">
                     <el-menu-item index="1-3">
                       <i class="el-icon-document"></i>
                       最近7天
@@ -54,10 +54,10 @@
                   <span slot="title">添加清单</span>
                 </el-menu-item>
               </router-link>
-              <router-link to="/foo">
+              <router-link to="/setting">
                 <el-menu-item index="9">
                   <i class="el-icon-circle-plus-outline"></i>
-                  <span slot="title">添加标签</span>
+                  <span slot="title">系统设置</span>
                 </el-menu-item>
               </router-link>
             </el-menu>
@@ -67,13 +67,25 @@
       <el-main>
         <router-view></router-view>
       </el-main>
-    </el-container>
+    </el-container>-->
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
+import store from "../dataStore/index";
 export default {
-  name: "demo"
+  name: "demo",
+  data() {
+    return {
+      // show: ture
+    };
+  },
+  mounted() {
+    // if (store.state.login.loginState === false) {
+    //   this.show = false;
+    // }
+  }
 };
 </script>
 
@@ -83,7 +95,10 @@ export default {
   margin: 0;
   padding: 0;
 }
-
+html {
+  /* 禁用html的滚动条，因为用的无框架窗口，默认就会有一个滚动条，所以去掉 */
+  overflow-y: hidden;
+}
 body {
   font-family: "Source Sans Pro", sans-serif;
   border-top: 1px solid rgb(248, 246, 246);

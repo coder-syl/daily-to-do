@@ -1,17 +1,19 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import login from './modules/login'
 import { createPersistedState, createSharedMutations } from 'vuex-electron'
 
-import modules from './modules'
+import modules from './modules/index'
 
 Vue.use(Vuex)
-
-export default new Vuex.Store({
+/** vuex的写法，从模块导入
+ */
+const store = new Vuex.Store({
   modules,
-  plugins: [
-    createPersistedState(),
-    createSharedMutations()
-  ],
+  // plugins: [
+  //   createPersistedState(),
+  //   createSharedMutations()
+  // ],
   strict: process.env.NODE_ENV !== 'production'
 })
+export default store;

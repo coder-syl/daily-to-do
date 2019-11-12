@@ -23,11 +23,15 @@ db._.mixin(LodashId)
 // 初始化数据
 if (!db.has('user').value()) {
     console.log("初始化数据")
-    db.set('user', [{ userId: 'coder-syl', password: '123456' }]).write()
+    db.set('user', [{ userId: 'coder-syl', password: '123456', autoStart: false }]).write()
 }
 if (!db.has('toDo').value()) {
     console.log("初始化数据")
     db.set('toDo', []).write()
+}
+if (!db.has('tags').value()) {
+    console.log("初始化数据")
+    db.set('tags', []).write()
 }
 
 export default db

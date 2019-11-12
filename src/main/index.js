@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron'
 import { createMenu } from './menu.js'
 import db from '../dataStore/index'
 /**
@@ -19,16 +19,22 @@ function createWindow() {
    */
   createMenu();
   mainWindow = new BrowserWindow({
-    height: 565,
+    // height: 565,
+    //     width: 1050,
+    height: 324,
+    width: 330,
     useContentSize: true,
-    width: 1050,
     autoHideMenuBar: true,
     darkTheme: true,
     // resizable: false,
   })
-
+  ipcMain.on('logined', event => {
+    mainWindow.setSize(1080, 565)
+    mainWindow.center()
+    // mainWindow.show()
+    mainWindow.setResizable(true)
+  })
   mainWindow.loadURL(winURL)
-
   mainWindow.on('closed', () => {
     mainWindow = null
   })
