@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import login from './modules/login'
-import { createPersistedState, createSharedMutations } from 'vuex-electron'
+// import login from './modules/login'
+// import { createPersistedState, createSharedMutations } from 'vuex-electron'
 
-import modules from './modules/index'
+import modules from './modules'
 
 Vue.use(Vuex)
 /** vuex的写法，从模块导入

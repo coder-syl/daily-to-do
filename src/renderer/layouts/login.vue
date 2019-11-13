@@ -1,33 +1,35 @@
 <template>
-  <div class="login">
-    <el-form
-      :model="ruleForm"
-      status-icon
-      :rules="rules"
-      ref="ruleForm"
-      label-width="80px"
-      label-position="left"
-    >
-      <el-form-item label="用户名" prop="userName">
-        <el-input v-model="ruleForm.userName" placeholder="请输入用户名" style="width: 180px;"></el-input>
-      </el-form-item>
-      <el-form-item label="密码" prop="password">
-        <el-input
-          type="password"
-          v-model="ruleForm.password"
-          placeholder="请输入密码"
-          style="width: 180px;"
-        ></el-input>
-      </el-form-item>
-      <el-form-item label="开机启动" prop="autoStart">
-        <el-switch v-model="ruleForm.autoStart"></el-switch>
-      </el-form-item>
+  <div class="bg">
+    <div class="login">
+      <el-form
+        :model="ruleForm"
+        status-icon
+        :rules="rules"
+        ref="ruleForm"
+        label-width="80px"
+        label-position="left"
+      >
+        <el-form-item label="用户名" prop="userName">
+          <el-input v-model="ruleForm.userName" placeholder="请输入用户名" style="width: 180px;"></el-input>
+        </el-form-item>
+        <el-form-item label="密码" prop="password">
+          <el-input
+            type="password"
+            v-model="ruleForm.password"
+            placeholder="请输入密码"
+            style="width: 180px;"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="开机启动" prop="autoStart">
+          <el-switch v-model="ruleForm.autoStart"></el-switch>
+        </el-form-item>
 
-      <el-form-item>
-        <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
-        <el-button @click="resetForm('ruleForm')">重置</el-button>
-      </el-form-item>
-    </el-form>
+        <el-form-item>
+          <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+          <el-button @click="resetForm('ruleForm')">重置</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
   </div>
 </template>
 
@@ -67,6 +69,8 @@ export default {
             this.ruleForm.userName !== this.user.userName ||
             this.user.password !== this.ruleForm.password
           ) {
+            console.log(this.user.userName)
+            console.log(this.ruleForm.password)
             // this.$message.error("用户名或者密码错误");
             this.$message({
               message: "用户名或者密码错误",
@@ -108,6 +112,9 @@ export default {
 };
 </script>
 <style lang='css' scoped>
+/* .bg {
+  background: url("../../../static/login.jpg") 100% 100%;
+} */
 .login {
   width: 240px;
   height: 280px;

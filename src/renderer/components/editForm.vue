@@ -1,6 +1,12 @@
 <template>
   <div class="drawer-content">
-    <el-form ref="toDoform" :rules="rules" :model="toDoform" label-width="80px" disabled="disabled">
+    <el-form
+      ref="toDoform"
+      :rules="rules"
+      :model="toDoform"
+      label-width="80px"
+      :disabled="disabled"
+    >
       <el-form-item label="待作名称" prop="name">
         <el-input v-model="toDoform.name" style="width:500px" placeholder="请添加新的标签"></el-input>
       </el-form-item>
@@ -39,14 +45,15 @@
         <el-input type="textarea" style="width:500px" :rows="4" v-model="toDoform.detail"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit('toDoform')">立即创建</el-button>
-        <el-button @click="resetForm('toDoform')">重置</el-button>
+        <el-button type="primary" @click="onSubmit('toDoform')">确认修改</el-button>
+        <!-- <el-button @click="resetForm('toDoform')">重置</el-button> -->
+        <!-- <el-button @click="resetForm('toDoform')">重置</el-button> -->
       </el-form-item>
     </el-form>
-    <div class="demo-drawer__footer">
+    <!-- <div class="demo-drawer__footer">
       <el-button @click="dialog = false">取 消</el-button>
       <el-button type="primary" @click="$refs.drawer.closeDrawer()">tijao</el-button>
-    </div>
+    </div>-->
   </div>
 </template>
 <script scoped>
@@ -61,16 +68,7 @@ export default {
       show: true,
       tags: [],
       newTag: "",
-      toDoform: {
-        name: "",
-        belong: "",
-        endDate: "",
-        endTime: "",
-        notice: false,
-        importance: "",
-        detail: "",
-        flag: 1
-      },
+      toDoform: {},
       rules: {
         name: [
           { required: true, message: "请输入待作事件名称", trigger: "blur" }
@@ -104,7 +102,8 @@ export default {
   methods: {
     initData() {
       this.toDoform = this.editData;
-      console.log("tasdfa sdf", this.toDoform);
+      this.tags = this.$db.get("tags").value();
+      console.log("tasdfa sdf", this.toDoform.id);
     },
     onSubmit(formName) {
       console.log(this.toDoform.name);
@@ -112,7 +111,8 @@ export default {
         if (valid) {
           let result = this.$db
             .get("toDo")
-            .insert({
+            .find({ id: this.toDoform.id })
+            .assign({
               // 对数组进行insert操作
               name: this.toDoform.name,
               belong: this.toDoform.belong,
@@ -121,18 +121,18 @@ export default {
               notice: this.toDoform.notice,
               importance: this.toDoform.importance,
               detail: this.toDoform.detail,
-              flag: 0
+              flag: this.toDoform.flag
             })
             .write();
           if (result) {
             this.$message({
-              message: "添加清单成功",
+              message: "修改成功",
               type: "success"
             });
-            this.resetForm("toDoform");
+            // this.resetForm("toDoform");
           }
         } else {
-          this.$message.error("添加清单失败，请检查输入是否正确");
+          this.$message.error("修改失败，请检查输入是否正确");
           return false;
         }
       });

@@ -67,7 +67,7 @@ const router = new Router({
     },
     {
       path: '*',
-      redirect: '/login'
+      redirect: '/'
     },
     {
       path: '/login',
@@ -76,22 +76,22 @@ const router = new Router({
     },
   ]
 })
-// router.beforeEach((to, from, next) => {
-//   if (to.matched.some(record => record.meta.auth)) {
-//     // this route requires auth, check if logged in
-//     // if not, redirect to login page.
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.auth)) {
+    // this route requires auth, check if logged in
+    // if not, redirect to login page.
 
-//     if (store.state.login.loginState === false) {
-//       console.log("不可以登录")
-//       next({
-//         path: '/login',
-//         query: { redirect: to.fullPath }
-//       })
-//     } else {
-//       next()
-//     }
-//   } else {
-//     next() // 确保一定要调用 next()
-//   }
-// })
+    if (store.state.login.loginState === false) {
+      console.log("不可以登录")
+      next({
+        path: '/login',
+        query: { redirect: to.fullPath }
+      })
+    } else {
+      next()
+    }
+  } else {
+    next() // 确保一定要调用 next()
+  }
+})
 export default router;

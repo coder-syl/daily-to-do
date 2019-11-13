@@ -14,10 +14,14 @@
           <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
           <el-button
             size="mini"
+            type="success"
+            @click="handleDelete(scope.$index, scope.row,0)"
+          >设为待作</el-button>
+          <el-button
+            size="mini"
             type="danger"
             @click="handleDelete(scope.$index, scope.row,2)"
           >Delete</el-button>
-          <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row,0)">设为待作</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -28,7 +32,7 @@
       custom-class="demo-drawer"
       ref="drawer"
     >
-      <editForm disabled="true" :editData="editData"></editForm>
+      <editForm :disabled="true" :editData="editData"></editForm>
     </el-drawer>
   </div>
 </template>
